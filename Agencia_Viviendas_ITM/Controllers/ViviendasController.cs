@@ -33,7 +33,6 @@ namespace Agencia_Viviendas_ITM.Controllers
         public string Insertar([FromBody] Vivienda vivienda)
         {
             clsVivienda Vivienda = new clsVivienda();
-            // Se asigna el objeto 'vivienda' (recibido como parámetro) a la propiedad 'vivienda' de la instancia 'Vivienda'.
             Vivienda.vivienda = vivienda;
             return Vivienda.Insertar();
         }
@@ -66,14 +65,10 @@ namespace Agencia_Viviendas_ITM.Controllers
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar([FromBody] Vivienda vivienda)
+        public string Eliminar(int id)
         {
             clsVivienda Vivienda = new clsVivienda();
-            Vivienda.vivienda = vivienda;
-            return Vivienda.Eliminar();
+            return Vivienda.Eliminar(id);
         }
-
-
-
     }
 }

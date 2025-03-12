@@ -17,15 +17,16 @@ namespace Agencia_Viviendas_ITM.Clases
         {
             try
             {
-                dbAgenciaITM.Viviendas.Add(vivienda); //Agrega la vivienda al contexto
+                dbAgenciaITM.Viviendas.Add(vivienda);
                 dbAgenciaITM.SaveChanges();
-                return "Vivienda registrada correctamente";
+                return "Se grabó la vivienda en la base de datos.";
             }
             catch (Exception ex)
             {
-                return "Error al registara nueva vivienda: " + ex.Message;
+                return "Error al registrar la vivienda: " + ex.Message;
             }
         }
+
 
         //Método para consultar una vivienda por su ID
         public Vivienda Consultar(int id)
@@ -45,18 +46,14 @@ namespace Agencia_Viviendas_ITM.Clases
         {
             try
             {
-                //Antes de actualizar, se debería consultar si el dato ya existe para poder actualizarlo, de lo contrario se debería insertar o retornar un mensaje de error
-                //Consultar el empleado
                 Vivienda vivien = Consultar(vivienda.Id);
                 if (vivien == null)
                 {
-                    return "La vivienda que intenta actualizar no existe";
+                    return "La vivienda no está definida en la base de datos.";
                 }
-                //Actualizar la vivienda
                 dbAgenciaITM.Viviendas.AddOrUpdate(vivienda);
                 dbAgenciaITM.SaveChanges();
-                return "Vivienda actualizada correctamente";
-
+                return "Se actualizó la vivienda en la base de datos.";
             }
             catch (Exception ex)
             {
@@ -64,20 +61,19 @@ namespace Agencia_Viviendas_ITM.Clases
             }
         }
 
-        public string Eliminar()
+
+        public string Eliminar(int id)
         {
             try
             {
-                //Consultar si la vivienda existe
-                Vivienda vivien = Consultar(vivienda.Id);
+                Vivienda vivien = Consultar(id);
                 if (vivien == null)
                 {
-                    return "La vivienda que intenta eliminar no existe";
+                    return "La vivienda no está definida en la base de datos.";
                 }
-                //Eliminar la vivienda
                 dbAgenciaITM.Viviendas.Remove(vivien);
                 dbAgenciaITM.SaveChanges();
-                return "Vivienda eliminada correctamente";
+                return "Se eliminó la vivienda en la base de datos.";
             }
             catch (Exception ex)
             {
